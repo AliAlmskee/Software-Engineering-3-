@@ -30,7 +30,7 @@ public class User implements UserDetails {
   private Integer id;
   private String firstname;
   private String lastname;
-  private String phone;
+  private String email;
   private String password;
 
   @Enumerated(EnumType.STRING)
@@ -51,7 +51,7 @@ public class User implements UserDetails {
 
   @Override
   public String getUsername() {
-    return phone;
+    return email;
   }
 
   @Override

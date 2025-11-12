@@ -21,12 +21,9 @@ import java.time.format.DateTimeFormatter;
 public class LoggingAspect {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoggingAspect.class);
 
-    @Before("execution(* com.main..*(..)) &&" +
-            " !@annotation(com.main.aspect.NoLogging) &&" +
-            " !execution(* com.main.config..*(..)) && " +
-            " !execution(* com.main.aspect..*(..)) &&" +
-            " !within(org.springframework.web.filter.OncePerRequestFilter+) &&" +
-            " !within(jakarta.servlet.Filter+)")
+    @Before("(@within(org.springframework.web.bind.annotation.RestController) ||" +
+            " @within(org.springframework.stereotype.Controller)) &&" +
+            " !@annotation(com.main.aspect.NoLogging)")
     public void logMethodCall(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Class<?> targetClass = signature.getDeclaringType();
@@ -46,60 +43,59 @@ public class LoggingAspect {
             userId = String.valueOf(user.getId());
             if (user.getFirstname() != null && user.getLastname() != null) {
                 userName = user.getFirstname() + " " + user.getLastname();
-            } else if (user.getPhone() != null) {
-                userName = user.getPhone();
+            } else if (user.getEmail() != null) {
+                userName = user.getEmail();
             }
         }
         
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        String threadName = Thread.currentThread().getName();
-        targetLogger.info("User: {} (ID: {}) | API: {}.{} | Time: {} | Thread: {}",
-                userName, userId, className, methodName, timestamp, threadName);
+        targetLogger.info("User: {} (ID: {}) | API: {}.{} | Time: {} ",
+                userName, userId, className, methodName, timestamp);
     }
 
-    @AfterThrowing(pointcut = "execution(* com.main..*(..)) &&" +
-            " !@annotation(com.main.aspect.NoLogging) &&" +
-            " !execution(* com.main.config..*(..)) && " +
-            " !execution(* com.main.aspect..*(..)) &&" +
-            " !within(org.springframework.web.filter.OncePerRequestFilter+) &&" +
-            " !within(jakarta.servlet.Filter+)", throwing = "exception")
-    public void logException(JoinPoint joinPoint, Throwable exception) {
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        Class<?> targetClass = signature.getDeclaringType();
-        String className = targetClass.getName();
-        String methodName = signature.getMethod().getName();
-        Logger targetLogger = LoggerFactory.getLogger(targetClass);
-        targetLogger.error("{}.{} - Exception occurred: {}", className, methodName, exception.getMessage());
-    }
+//    @AfterThrowing(pointcut = "execution(* com.main..*(..)) &&" +
+//            " !@annotation(com.main.aspect.NoLogging) &&" +
+//            " !execution(* com.main.config..*(..)) && " +
+//            " !execution(* com.main.aspect..*(..)) &&" +
+//            " !within(org.springframework.web.filter.OncePerRequestFilter+) &&" +
+//            " !within(jakarta.servlet.Filter+)", throwing = "exception")
+//    public void logException(JoinPoint joinPoint, Throwable exception) {
+//        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+//        Class<?> targetClass = signature.getDeclaringType();
+//        String className = targetClass.getName();
+//        String methodName = signature.getMethod().getName();
+//        Logger targetLogger = LoggerFactory.getLogger(targetClass);
+//        targetLogger.error("{}.{} - Exception occurred: {}", className, methodName, exception.getMessage());
+//    }
 
-    @Around("execution(* com.main..*(..)) &&" +
-            " !@annotation(com.main.aspect.NoLogging) &&" +
-            " !execution(* com.main.config..*(..)) && " +
-            " !execution(* com.main.aspect..*(..)) &&" +
-            " !within(org.springframework.web.filter.OncePerRequestFilter+) &&" +
-            " !within(jakarta.servlet.Filter+)")
-    public Object logPerformanceMetrics(ProceedingJoinPoint joinPoint) throws Throwable {
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        Method method = signature.getMethod();
-
-        // Get the actual target class (not the proxy)
-        Class<?> targetClass = signature.getDeclaringType();
-        
-        // Use the actual class name (not the proxy)
-        String className = targetClass.getName();
-        String methodName = method.getName();
-        
-        // Use a logger for the actual target class
-        Logger targetLogger = LoggerFactory.getLogger(targetClass);
-        
-        long startTime = System.currentTimeMillis();
-        Object result = joinPoint.proceed();
-        long endTime = System.currentTimeMillis();
-        long executionTime = endTime - startTime;
-        
-        // Log after method execution with execution time
-        targetLogger.info("{}.{} after {}ms", className, methodName, executionTime);
-        
-        return result;
-    }
+//    @Around("execution(* com.main..*(..)) &&" +
+//            " !@annotation(com.main.aspect.NoLogging) &&" +
+//            " !execution(* com.main.config..*(..)) && " +
+//            " !execution(* com.main.aspect..*(..)) &&" +
+//            " !within(org.springframework.web.filter.OncePerRequestFilter+) &&" +
+//            " !within(jakarta.servlet.Filter+)")
+//    public Object logPerformanceMetrics(ProceedingJoinPoint joinPoint) throws Throwable {
+//        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+//        Method method = signature.getMethod();
+//
+//        // Get the actual target class (not the proxy)
+//        Class<?> targetClass = signature.getDeclaringType();
+//
+//        // Use the actual class name (not the proxy)
+//        String className = targetClass.getName();
+//        String methodName = method.getName();
+//
+//        // Use a logger for the actual target class
+//        Logger targetLogger = LoggerFactory.getLogger(targetClass);
+//
+//        long startTime = System.currentTimeMillis();
+//        Object result = joinPoint.proceed();
+//        long endTime = System.currentTimeMillis();
+//        long executionTime = endTime - startTime;
+//
+//        // Log after method execution with execution time
+//        targetLogger.info("{}.{} after {}ms", className, methodName, executionTime);
+//
+//        return result;
+//    }
 }

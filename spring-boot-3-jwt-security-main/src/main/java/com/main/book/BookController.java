@@ -28,7 +28,6 @@ public class BookController {
     }
 
     @GetMapping
-    @NoLogging
     public ResponseEntity<List<Book>> findAllBooks() {
         return ResponseEntity.ok(service.findAll());
     }
