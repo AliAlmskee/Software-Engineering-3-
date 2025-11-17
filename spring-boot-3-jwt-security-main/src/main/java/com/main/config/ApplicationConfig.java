@@ -1,7 +1,7 @@
 package com.main.config;
 
 import com.main.auditing.ApplicationAuditAware;
-import com.main.user.UserRepository;
+import com.main.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +23,7 @@ public class ApplicationConfig {
 
   @Bean
   public UserDetailsService userDetailsService() {
-    return username -> repository.findByEmail(username)
+    return username -> repository.findByPhone(username)
         .orElseThrow(() -> new UsernameNotFoundException("User not found"));
   }
 

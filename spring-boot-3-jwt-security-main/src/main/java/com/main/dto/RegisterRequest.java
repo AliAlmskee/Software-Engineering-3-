@@ -1,6 +1,8 @@
-package com.main.auth;
+package com.main.dto;
 
-import com.main.user.Role;
+import com.main.entity.Role;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,9 +14,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RegisterRequest {
 
+  @NotEmpty
   private String firstname;
+
   private String lastname;
-  private String email;
-  private String password;
-  private Role role;
+
+  @NotEmpty
+  private String phone;
+
 }

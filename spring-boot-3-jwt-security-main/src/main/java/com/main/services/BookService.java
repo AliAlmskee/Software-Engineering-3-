@@ -1,6 +1,11 @@
-package com.main.book;
+package com.main.services;
 
+import com.main.entity.Book;
+import com.main.repository.BookRepository;
+import com.main.dto.BookRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,15 +16,16 @@ public class BookService {
 
     private final BookRepository repository;
 
-    public void save(BookRequest request) {
+    @CacheEvict(value = "books", allEntries = true)
+    public Book save(BookRequest request) {
         var book = Book.builder()
-                .id(request.getId())
                 .author(request.getAuthor())
                 .isbn(request.getIsbn())
                 .build();
-        repository.save(book);
+        return repository.save(book);
     }
 
+    @Cacheable("books")
     public List<Book> findAll() {
         return repository.findAll();
     }

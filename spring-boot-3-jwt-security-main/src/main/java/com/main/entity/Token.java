@@ -1,6 +1,5 @@
-package com.main.token;
+package com.main.entity;
 
-import com.main.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

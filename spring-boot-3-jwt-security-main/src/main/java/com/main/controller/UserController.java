@@ -1,5 +1,7 @@
-package com.main.user;
+package com.main.controller;
 
+import com.main.dto.ChangePasswordRequest;
+import com.main.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PatchMapping;

@@ -1,4 +1,4 @@
-package library.seeder;
+package com.main.seeder;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -10,10 +10,10 @@ public class DatabaseSeeder implements CommandLineRunner {
 
     private final UserSeeder userSeeder;
     private final BookSeeder bookSeeder;
+
     @Override
     public void run(String... args) throws Exception {
-
-                userSeeder.seed();
-                bookSeeder.seed();
+       // userSeeder.seed();
+        bookSeeder.seed();
     }
 }

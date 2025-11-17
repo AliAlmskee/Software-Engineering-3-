@@ -1,5 +1,8 @@
-package com.main.user;
+package com.main.services;
 
+import com.main.repository.UserRepository;
+import com.main.dto.ChangePasswordRequest;
+import com.main.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;

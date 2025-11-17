@@ -1,4 +1,4 @@
-package com.main.book;
+package com.main.dto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -8,8 +8,6 @@ import lombok.Setter;
 @Setter
 @Builder
 public class BookRequest {
-
-    private Integer id;
     private String author;
     private String isbn;
 }

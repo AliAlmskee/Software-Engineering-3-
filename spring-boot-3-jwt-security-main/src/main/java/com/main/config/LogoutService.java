@@ -1,6 +1,6 @@
 package com.main.config;
 
-import com.main.token.TokenRepository;
+import com.main.repository.TokenRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

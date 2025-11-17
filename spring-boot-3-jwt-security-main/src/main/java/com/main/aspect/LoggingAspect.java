@@ -1,9 +1,9 @@
 package com.main.aspect;
 
-import com.main.user.User;
+import com.main.entity.User;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -43,14 +42,13 @@ public class LoggingAspect {
             userId = String.valueOf(user.getId());
             if (user.getFirstname() != null && user.getLastname() != null) {
                 userName = user.getFirstname() + " " + user.getLastname();
-            } else if (user.getEmail() != null) {
-                userName = user.getEmail();
+            } else if (user.getPhone() != null) {
+                userName = user.getPhone();
             }
         }
         
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        targetLogger.info("User: {} (ID: {}) | API: {}.{} | Time: {} ",
-                userName, userId, className, methodName, timestamp);
+        targetLogger.info("User: {} (ID: {}) | API: {}.{} ",
+                userName, userId, className, methodName);
     }
 
 //    @AfterThrowing(pointcut = "execution(* com.main..*(..)) &&" +

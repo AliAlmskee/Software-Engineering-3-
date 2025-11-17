@@ -9,7 +9,7 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     show-sql: false
     properties:
       hibernate:
@@ -24,3 +24,7 @@ application:
       expiration: 86400000 # a day
       refresh-token:
         expiration: 604800000 # 7 days
+
+sms:
+  api_key: etdHoGbrTcq5MMZthsTxAP:APA91bHGu1KqFGcV6CW5KbjhiqY2G70lOXrf1gzAbR5IJNXKajivchCC7uR6WprdD9Dfjtites_tXSqDK3Mr9Uj1cDEKXD5uIpCJbvcfGdpqr385N0T8l80
+  url: https://www.traccar.org/sms/

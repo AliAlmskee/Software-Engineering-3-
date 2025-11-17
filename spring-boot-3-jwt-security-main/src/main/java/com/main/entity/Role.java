@@ -1,4 +1,4 @@
-package com.main.user;
+package com.main.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
