@@ -1,0 +1,31 @@
+package com.main.composite;
+
+
+import com.main.interfaces.TaxableAccountComponent;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AccountGroup implements TaxableAccountComponent {
+
+    private final String name;
+    private final List<TaxableAccountComponent> children = new ArrayList<>();
+
+    public AccountGroup(String name) {
+        this.name = name;
+    }
+
+    public void add(TaxableAccountComponent component) {
+        children.add(component);
+    }
+
+    @Override
+    public double getBalance() {
+        return children.stream().mapToDouble(TaxableAccountComponent::getBalance).sum();
+    }
+
+    @Override
+    public double getTax() {
+        return children.stream().mapToDouble(TaxableAccountComponent::getTax).sum();
+    }
+}

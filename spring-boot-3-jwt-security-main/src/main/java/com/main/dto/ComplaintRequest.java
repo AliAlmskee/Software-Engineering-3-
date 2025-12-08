@@ -1,14 +1,14 @@
 package com.main.dto;
 
-import com.main.entity.ComplaintStatus;
-import com.main.entity.ComplaintType;
+import com.main.entity.AccountStatus;
+import com.main.entity.AccountType;
 
 import java.util.List;
 
 public class ComplaintRequest {
-    private ComplaintStatus status;
+    private AccountStatus status;
     private List<String> files;
-    private ComplaintType type;
+    private AccountType type;
     private String location;
     private String description;
     private String complainedAbout;
@@ -30,14 +30,14 @@ public class ComplaintRequest {
     }
 
     public static class Builder {
-        private ComplaintStatus status;
+        private AccountStatus status;
         private List<String> files;
-        private ComplaintType type;
+        private AccountType type;
         private String location;
         private String description;
         private String complainedAbout;
 
-        public Builder status(ComplaintStatus status) {
+        public Builder status(AccountStatus status) {
             this.status = status;
             return this;
         }
@@ -47,7 +47,7 @@ public class ComplaintRequest {
             return this;
         }
 
-        public Builder type(ComplaintType type) {
+        public Builder type(AccountType type) {
             this.type = type;
             return this;
         }
@@ -72,11 +72,11 @@ public class ComplaintRequest {
         }
     }
 
-    public ComplaintStatus getStatus() {
+    public AccountStatus getStatus() {
         return status;
     }
 
-    public void setStatus(ComplaintStatus status) {
+    public void setStatus(AccountStatus status) {
         this.status = status;
     }
 
@@ -88,11 +88,11 @@ public class ComplaintRequest {
         this.files = files;
     }
 
-    public ComplaintType getType() {
+    public AccountType getType() {
         return type;
     }
 
-    public void setType(ComplaintType type) {
+    public void setType(AccountType type) {
         this.type = type;
     }
 
