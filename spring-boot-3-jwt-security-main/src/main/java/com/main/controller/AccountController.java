@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/accounts/tax")
@@ -23,4 +24,12 @@ public class AccountController {
         );
     }
 
+    @PostMapping("/group")
+    public Map<String, Object> getTaxForGroup(@RequestBody List<Long> accountIds) {
+        double tax = taxService.calculateTaxForAccountGroup(accountIds);
+        return Map.of(
+                "accountIds", accountIds,
+                "groupTax", tax
+        );
+    }
 }

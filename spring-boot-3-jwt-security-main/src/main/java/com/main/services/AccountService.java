@@ -8,6 +8,9 @@ import com.main.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+
 @RequiredArgsConstructor
 @Service
 public class AccountService {
@@ -21,4 +24,20 @@ public class AccountService {
         return leaf.getTax();
     }
 
+    public double calculateTaxForAccountGroup(List<Long> accountIds) {
+
+        AccountGroup group = new AccountGroup();
+
+        List<Account> accounts = accountRepository.findAllById(accountIds);
+
+        if (accounts.isEmpty()) {
+            throw new IllegalArgumentException("No accounts found for provided IDs");
+        }
+
+        for (Account account : accounts) {
+            group.add(new AccountTax(account));
+        }
+
+        return group.getTax();
+    }
 }

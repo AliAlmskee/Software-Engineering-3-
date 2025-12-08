@@ -8,12 +8,9 @@ import java.util.List;
 
 public class AccountGroup implements TaxableAccountComponent {
 
-    private final String name;
     private final List<TaxableAccountComponent> children = new ArrayList<>();
 
-    public AccountGroup(String name) {
-        this.name = name;
-    }
+    public AccountGroup() {}
 
     public void add(TaxableAccountComponent component) {
         children.add(component);
