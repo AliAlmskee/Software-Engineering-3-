@@ -16,5 +16,6 @@ public class Transaction extends BaseEntity {
 
     private Account senderAccount;
     private Account receiverAccount;
+    private Integer amount;
 
 }
