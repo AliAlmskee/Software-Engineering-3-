@@ -3,7 +3,7 @@ package com.main.services;
 import com.main.composite.AccountGroup;
 import com.main.composite.AccountTax;
 import com.main.entity.Account;
-import com.main.interfaces.TaxableAccountComponent;
+import com.main.composite.TaxableAccountComponent;
 import com.main.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

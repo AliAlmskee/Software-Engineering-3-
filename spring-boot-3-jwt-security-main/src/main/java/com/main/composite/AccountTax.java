@@ -1,7 +1,6 @@
 package com.main.composite;
 
 import com.main.entity.Account;
-import com.main.interfaces.TaxableAccountComponent;
 
 public class AccountTax implements TaxableAccountComponent {
 

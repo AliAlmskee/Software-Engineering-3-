@@ -1,4 +1,4 @@
-package com.main.interfaces;
+package com.main.composite;
 
 public interface TaxableAccountComponent {
     double getBalance();
