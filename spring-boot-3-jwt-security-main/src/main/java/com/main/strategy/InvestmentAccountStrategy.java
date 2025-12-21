@@ -1,6 +1,6 @@
 package com.main.strategy;
 
-public class LoanAccountStrategy implements InterestCalculationStrategy {
+public class InvestmentAccountStrategy implements InterestCalculationStrategy {
 
     @Override
     public double calculateInterest(double principal, double rate, int months) {

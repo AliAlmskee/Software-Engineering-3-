@@ -16,10 +16,10 @@ public class InterestStrategyFactory {
                 return new SavingsAccountStrategy();
 
             case CHECKING:
-                return new FixedDepositStrategy();
+                return new CheckingDepositStrategy();
 
             case INVESTMENT:
-                return new LoanAccountStrategy();
+                return new InvestmentAccountStrategy();
 
             default:
                 throw new IllegalArgumentException(

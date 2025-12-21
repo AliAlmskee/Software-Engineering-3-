@@ -1,6 +1,6 @@
 package com.main.strategy;
 
-public class FixedDepositStrategy implements InterestCalculationStrategy {
+public class CheckingDepositStrategy implements InterestCalculationStrategy {
 
     @Override
     public double calculateInterest(double principal, double rate, int months) {
