@@ -1,10 +1,5 @@
 package com.main.controller;
 
-import com.main.adapter.InternationalWireAdapter;
-import com.main.adapter.LegacyBankAdapter;
-import com.main.adapter.PaymentProcessor;
-import com.main.entity.Account;
-import com.main.repository.AccountRepository;
 import com.main.services.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
